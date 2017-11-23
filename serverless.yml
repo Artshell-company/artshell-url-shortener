@@ -1,0 +1,82 @@
+service: artshell-url-shortener
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-west-1
+  stage: ${opt:stage, self:custom.defaultStage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource:
+        - arn:aws:dynamodb:eu-west-1:*:table/urls-by-shortid-${self:provider.stage}
+        - arn:aws:dynamodb:eu-west-1:*:table/shortids-by-url-${self:provider.stage}
+
+plugins:
+  - serverless-webpack
+  - serverless-domain-manager
+
+custom:
+  defaultStage: dev
+  webpackIncludeModules:
+    packagePath: './package.json'
+  customDomain:
+    domainName: qr.artshell.link
+    basePath: ''
+    stage: ${self:provider.stage}
+
+functions:
+  shorten:
+    handler: handler.shorten
+    events:
+      - http:
+          path: shorten
+          method: post
+          authorizer: aws_iam
+    environment:
+      urls_by_shortid_table: urls-by-shortid-${self:provider.stage}
+      shortids_by_url_table: shortids-by-url-${self:provider.stage}
+  resolve:
+    handler: handler.resolve
+    events:
+      - http:
+          path: r/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+    environment:
+      urls_by_shortid_table: urls-by-shortid-${self:provider.stage}
+
+resources:
+  Resources:
+    urlsByShortIdTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: urls-by-shortid-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    shortIdsByUrlTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: shortids-by-url-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: url
+            AttributeType: S
+        KeySchema:
+          - AttributeName: url
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
