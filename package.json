@@ -2,12 +2,15 @@
   "name": "artshell-url-shortener",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
+  "main": "src/handler.js",
   "dependencies": {
     "aws-sdk": "^2.156.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "normalize-url": "^1.9.1",
+    "serverless-dynamodb-client": "0.0.2",
+    "serverless-dynamodb-local": "^0.2.26",
+    "serverless-offline": "^3.16.0",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
@@ -21,7 +24,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serverless offline start",
+    "deploy": "serverless deploy --stage production"
   },
   "author": "",
   "license": "ISC"

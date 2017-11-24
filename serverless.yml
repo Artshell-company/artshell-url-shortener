@@ -18,6 +18,8 @@ provider:
 plugins:
   - serverless-webpack
   - serverless-domain-manager
+  - serverless-offline
+  - serverless-dynamodb-local
 
 custom:
   defaultStage: dev
@@ -27,20 +29,28 @@ custom:
     domainName: qr.artshell.link
     basePath: ''
     stage: ${self:provider.stage}
+  serverless-offline:
+    port: 8888
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
 
 functions:
   shorten:
-    handler: handler.shorten
+    handler: src/handler.shorten
     events:
       - http:
           path: shorten
           method: post
-          authorizer: aws_iam
+          authorizer: 
+            type: aws_iam
     environment:
       urls_by_shortid_table: urls-by-shortid-${self:provider.stage}
       shortids_by_url_table: shortids-by-url-${self:provider.stage}
   resolve:
-    handler: handler.resolve
+    handler: src/handler.resolve
     events:
       - http:
           path: r/{id}

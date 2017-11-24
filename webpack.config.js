@@ -1,20 +1,21 @@
-var nodeExternals = require('webpack-node-externals');
-var path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const slsw = require('serverless-webpack');
 
 module.exports = {
-  entry: './handler.js',
+  entry: slsw.lib.entries,
   target: 'node',
   externals: [nodeExternals()],
   output: {
     libraryTarget: 'commonjs',
-    path: path.resolve('.webpack'),
-    filename: 'handler.js', // this should match the first part of function handler in serverless.yml
+    path: path.join(__dirname, '.webpack'),
+    filename: '[name].js',
   },
   module: {
     loaders: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ["babel-loader"]
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loaders: ['babel-loader']
     }]
   }
 };
