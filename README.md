@@ -1,6 +1,10 @@
 # Artshell URL shortener
 
-Written in ES6 with webpack and babel. Built and deployed with Serverless.
+URL Shortener used by Artshell for handling QR Code urls.
+
+- Built with the Serverless framework
+- Written in ES6 through webpack and babel
+- It uses two DynamoDB tables to perform lookups in single-digit milliseconds
 
 ### Local development
 
