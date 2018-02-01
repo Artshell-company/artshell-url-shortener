@@ -1,6 +1,6 @@
 # Artshell URL shortener
 
-[![CircleCI](https://circleci.com/gh/mikamai/artshell-url-shortener.svg?style=svg&circle-token=3de89644a66072585ca3bc62afa04eab815a5fa0)](https://circleci.com/gh/mikamai/artshell-url-shortener)
+[![CircleCI](https://circleci.com/gh/mikamai/artshell-url-shortener.svg?style=svg&circle-token=3de89644a66072585ca3bc62afa04eab815a5fa0)](https://circleci.com/gh/mikamai/artshell-url-shortener) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2548dac0860b47329abcfc84a2e94aca)](https://www.codacy.com/app/MIKAMAI/artshell-url-shortener?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mikamai/artshell-url-shortener&amp;utm_campaign=Badge_Grade)
 
 URL Shortener used by [Artshell](http://www.artshell.net).
 
