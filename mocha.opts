@@ -1,0 +1,6 @@
+--recursive
+--require babel-core/register
+--require babel-polyfill
+--require test.prepare.js
+test.hooks.js
+src/

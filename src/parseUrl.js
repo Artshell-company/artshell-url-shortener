@@ -5,9 +5,9 @@ const normalizeOpts = {
   stripWWW: false,
 };
 
-export default (event) => {
+export default ({ body }) => {
   try {
-    const url = JSON.parse(event.body).url;
+    const url = JSON.parse(body).url;
     return url && url.length > 0 ? normalizeUrl(url, normalizeOpts) : null;
   } catch (_e) {
     return null;

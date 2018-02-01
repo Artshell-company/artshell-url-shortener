@@ -44,11 +44,11 @@ functions:
       - http:
           path: shorten
           method: post
-          authorizer: 
+          authorizer:
             type: aws_iam
     environment:
-      urls_by_shortid_table: urls-by-shortid-${self:provider.stage}
-      shortids_by_url_table: shortids-by-url-${self:provider.stage}
+      URLS_BY_SHORTID_TABLE: urls-by-shortid-${self:provider.stage}
+      SHORTIDS_BY_URL_TABLE: shortids-by-url-${self:provider.stage}
   resolve:
     handler: src/handler.resolve
     events:
@@ -60,9 +60,10 @@ functions:
               paths:
                 id: true
     environment:
-      urls_by_shortid_table: urls-by-shortid-${self:provider.stage}
+      URLS_BY_SHORTID_TABLE: urls-by-shortid-${self:provider.stage}
 
 resources:
+    # if you change this, remember to also change the tables definitions in test.hooks.js
   Resources:
     urlsByShortIdTable:
       Type: AWS::DynamoDB::Table
