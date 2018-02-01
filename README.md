@@ -1,5 +1,7 @@
 # Artshell URL shortener
 
+[![CircleCI](https://circleci.com/gh/mikamai/artshell-url-shortener.svg?style=svg&circle-token=3de89644a66072585ca3bc62afa04eab815a5fa0)](https://circleci.com/gh/mikamai/artshell-url-shortener)
+
 URL Shortener used by [Artshell](http://www.artshell.net).
 
 - Built with the Serverless framework
