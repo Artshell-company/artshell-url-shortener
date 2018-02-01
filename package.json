@@ -28,6 +28,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
+    "test:setup": "node test.setup.js",
     "test": "mocha --opts ./mocha.opts",
     "start": "serverless offline start",
     "deploy": "serverless deploy --stage production"

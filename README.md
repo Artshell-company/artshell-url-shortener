@@ -16,6 +16,12 @@ You can deploy with `npm run script`. Just remember to have the AWS credentials 
 
 The deploy script will ensure that DynamoDB tables are created, to create a qr.artshell.link subdomain, a CloudFront distribution, and to point the CF distribution to the Lambda function.
 
+### Tests
+
+First, remember to install DynamoDB local with `npm run test:setup`.
+
+You can then run tests with `npm test`.
+
 ### Calling the service
 
 There are two routes:
