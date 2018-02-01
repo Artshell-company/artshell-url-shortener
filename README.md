@@ -1,6 +1,6 @@
 # Artshell URL shortener
 
-URL Shortener used by Artshell for handling QR Code urls.
+URL Shortener used by [Artshell](http://www.artshell.net).
 
 - Built with the Serverless framework
 - Written in ES6 through webpack and babel
